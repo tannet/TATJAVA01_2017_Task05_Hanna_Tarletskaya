@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema"
-		targetNamespace="urn:xml.menu"
-		xmlns:tns="urn:xml.menu"
-		elementFormDefault="qualified">
 
-		<element name="menu">
-			<complexType>
-				<sequence>
-					<element name="dish" type="tns:dish-type" minOccurs="1" maxOccurs="unbounded" />
-				</sequence>
-			</complexType>
-		</element>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.epam.task5.org/Menu"
+	xmlns:tns="http://www.epam.task5.org/Menu" 
+	elementFormDefault="qualified">
+
+	<element name="menu">
+		<complexType>
+			<sequence>
+				<element name="food" type="tns:food-type" minOccurs="1"
+					maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+
+
+	<complexType name="food-type">
+		<sequence>
+			<element name="category" type="tns:category" />
+			<element name="name" type="string" />
+			<element name="description" type="string" />
+			<element name="weight" type="tns:weight-type" />
+			<element name="price" type="tns:price-type" minOccurs="0" maxOccurs="1" />
+		</sequence>
+		<attribute name="id" type="integer" />
+	</complexType>
+	
+	
+	<simpleType name="category">
+		<restriction base="string">
+			<enumeration value="Холодные закуски" />
+			<enumeration value="Горячие закуски" />
+			<enumeration value="Завтраки" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="weight-type">
+		<restriction base="string">
+		 <pattern value="[\d\(/)]*"/>		
+		</restriction>
+	</simpleType>
+
+	<simpleType name="price-type">
+		<restriction base="string">
+		 <pattern value="[\d\.]*"/>			
+		</restriction>
+	</simpleType>
+
 </schema>
